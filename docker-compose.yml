@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+
+  dinero-postgres:
+    image: postgres:10-alpine
+    container_name: 'dinero-postgres'
+    environment:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+      POSTGRES_DB: 'postgres'
+    labels:
+      application: 'dinero-postgres'
+    ports:
+      - '5432:5432'
+    expose:
+      - '5432'
+
+  dinero-django:
+    build:
+      context: ./
+    command: python3 src/manage.py runserver 0.0.0.0:8001
+    container_name: 'dinero-django'
+    labels:
+      application: 'dinero-django'
+    volumes:
+      - ./:/code
+    ports:
+      - '8001:8001'
+    depends_on:
+      - dinero-postgres
+    expose:
+      - '8001'
+    environment:
+      DEBUG: 'True'
+      SECRET_KEY: 'SECRET_KEY'
+      DATABASE_URL: 'postgres://postgres:postgres@dinero-postgres:5432/postgres'
+      HOSTNAME: 'http://localhost:8001/'
+      ALLOWED_HOSTS: '*'
+      TPAY_ID: '1010'
+      TPAY_CODE: 'demo'
