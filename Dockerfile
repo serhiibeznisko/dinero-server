@@ -25,3 +25,6 @@ RUN find /usr/local \
     )" \
     && apk add --virtual .rundeps $runDeps \
     && apk del curl \
+    && chmod +x /code/infrastructure/azure/production_startup.sh
+
+CMD /code/infrastructure/azure/production_startup.sh
