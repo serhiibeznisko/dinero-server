@@ -35,7 +35,3 @@ services:
       DEBUG: 'True'
       SECRET_KEY: 'SECRET_KEY'
       DATABASE_URL: 'postgres://postgres:postgres@dinero-postgres:5432/postgres'
-      HOSTNAME: 'http://localhost:8001/'
-      ALLOWED_HOSTS: '*'
-      TPAY_ID: '1010'
-      TPAY_CODE: 'demo'
