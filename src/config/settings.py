@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 CORS_ORIGIN_ALLOW_ALL = True
 
 DATABASES = {
-    'default': dj_database_url.config(conn_max_age=600)
+    'default': dj_database_url.config(conn_max_age=600, default='sqlite:///db.sqlite3')
 }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -117,6 +117,7 @@ STATIC_URL = os.environ.get('CDN_HOSTNAME', '') + '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+STATIC_ROOT = 'static/'
 
 MEDIA_URL = os.environ.get('CDN_HOSTNAME', '') + '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
