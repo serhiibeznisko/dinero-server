@@ -43,6 +43,7 @@ class WalletSerializer(serializers.Serializer):
         queryset=Currency.objects.all(),
         slug_field='code',
     )
+    name = serializers.CharField(max_length=64)
     balance = serializers.FloatField(min_value=0)
 
     def validate_currency(self, value):

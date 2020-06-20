@@ -21,6 +21,7 @@ class Currency(CreatedUpdatedModel):
 class Wallet(CreatedUpdatedModel, UpdateMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='wallet_set')
     currency = models.ForeignKey(Currency, on_delete=models.PROTECT, related_name='wallet_set')
+    name = models.CharField(max_length=64)
     balance = models.FloatField(default=0)
 
     class Meta:

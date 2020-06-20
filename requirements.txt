@@ -1,3 +1,5 @@
+azure==4.0.0
+azure-storage-blob==12.3.2
 django==2.2.10
 django-cors-headers==3.2.1
 django-rest-swagger==2.2.0
