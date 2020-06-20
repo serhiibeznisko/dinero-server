@@ -109,19 +109,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = os.environ.get('CDN_HOSTNAME', '') + '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-STATIC_ROOT = '/home/site/wwwroot/src/config/static'
-
-MEDIA_URL = os.environ.get('CDN_HOSTNAME', '') + '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -200,13 +187,26 @@ LOGGING = {
     },
 }
 
-# Storage settings
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-AWS_QUERYSTRING_AUTH = False
-AWS_S3_CUSTOM_DOMAIN = os.environ.get('CDN_HOSTNAME')
 
-if AWS_ACCESS_KEY_ID:
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+STATIC_URL = os.environ.get('CDN_HOSTNAME', '') + '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+MEDIA_URL = os.environ.get('CDN_HOSTNAME', '') + '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#
+# # Storage settings
+# DEFAULT_FILE_STORAGE = 'backend.custom_azure.AzureMediaStorage'
+# STATICFILES_STORAGE = 'backend.custom_azure.AzureStaticStorage'
+#
+# STATIC_LOCATION = "static"
+# MEDIA_LOCATION = "media"
+#
+# AZURE_ACCOUNT_NAME = "djangoaccountstorage"
+# AZURE_CUSTOM_DOMAIN = f'{AZURE_ACCOUNT_NAME}.blob.core.windows.net'
+# STATIC_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+# MEDIA_URL = f'https://{AZURE_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
