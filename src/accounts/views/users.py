@@ -1,9 +1,10 @@
 from drf_yasg.utils import swagger_auto_schema
 
 from django.utils.decorators import method_decorator
-from rest_framework import generics
+from rest_framework import generics, filters
 
-from ..serializers.users import MeSerializer
+from ..models import User
+from ..serializers.users import MeSerializer, UseSerializer
 
 
 @method_decorator(name='get', decorator=swagger_auto_schema(
@@ -20,3 +21,13 @@ class MeAPIView(generics.RetrieveUpdateAPIView):
 
     def get_object(self):
         return self.request.user
+
+
+@method_decorator(name='get', decorator=swagger_auto_schema(
+    operation_summary='[User Search] Retrieve list of registered users and perform search.',
+))
+class UserListAPIView(generics.ListAPIView):
+    serializer_class = UseSerializer
+    queryset = User.objects.all()
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
