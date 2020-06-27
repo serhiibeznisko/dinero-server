@@ -24,6 +24,9 @@ class Wallet(CreatedUpdatedModel, UpdateMixin):
     name = models.CharField(max_length=64)
     balance = models.FloatField(default=0)
 
+    def __str__(self):
+        return self.name
+
     class Meta:
         unique_together = ('user', 'currency')
 
